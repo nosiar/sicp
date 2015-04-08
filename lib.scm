@@ -1,6 +1,6 @@
-(define (inc x) (+ x 1))
-(define (dec x) (- x 1))
-(define (square x) (* x x))
+(define inc add1)
+(define dec sub1)
+(define square sqr)
 (define (average x y)
   (/ (+ x y) 2))
 

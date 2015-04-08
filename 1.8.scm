@@ -1,3 +1,4 @@
+(load "lib.scm")
 (define (cbrt-iter guess x)
   (define (improve guess x)
     (/ (+ (* 2 guess) (/ x (square guess))) 3))
