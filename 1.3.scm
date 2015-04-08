@@ -1,5 +1,4 @@
 (load "lib.scm")
-;
 (define (proc x y z)
         (if (> x y)
             (if (> y z)
@@ -19,4 +18,3 @@
 (proc 2 1 2)
 (proc 2 2 1)
 (proc 1 1 1)
-
