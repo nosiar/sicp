@@ -1,0 +1,20 @@
+(define (cont-frac n d k)
+  (define (cont-frac-sub curk)
+    (if (= curk k)
+        (/ (n curk) (d curk))
+        (/ (n curk) (+ (d curk) (cont-frac-sub (+ curk 1))))))
+  (cont-frac-sub 1))
+
+(define (cont-frac-iter n d k)
+  (define (cont-frac-iter-sub n d k result)
+    (if (= k 0)
+        result
+        (cont-frac-iter-sub n d (- k 1) (/ (n k) (+ (d k) result)))))
+  (cont-frac-iter-sub n d k 0))
+
+(/ 1 (cont-frac (lambda (i) 1.0)
+                (lambda (i) 1.0)
+                100))
+(/ 1 (cont-frac-iter (lambda (i) 1.0)
+                     (lambda (i) 1.0)
+                     100))
