@@ -1,0 +1,51 @@
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (find-divisor n test-divisor next)
+  (cond ((> (sqr test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (next test-divisor) next))))
+
+(define (smallest-divisor n next)
+  (find-divisor n 2 next))
+
+(define (prime? n next)
+  (= n (smallest-divisor n next)))
+
+(define (report-prime n elapsed-time)
+  (newline)
+  (display n)
+  (display " *** ")
+  (display elapsed-time)
+  elapsed-time)
+
+(define (start-prime-test n start-time next)
+  (if (prime? n next)
+      (report-prime n (- (current-inexact-milliseconds) start-time))
+      0))
+
+(define (timed-prime-test n next)
+  (start-prime-test n (current-inexact-milliseconds) next))
+
+(define (search-for-primes n count)
+  (define (search-for-primes-sub n curcount r prevr next)
+;   (printf "~nsfps n:~a curcount:~a r:~a prevr:~a~n" n curcount r prevr)
+    (cond ((= curcount 0) (/ r count))
+          ((not (= r prevr)) (search-for-primes-sub n (- curcount 1) r r next))
+          ((even? n) (search-for-primes-sub (+ n 1) curcount r r next))
+          (else (search-for-primes-sub (+ n 2) curcount (+ r (timed-prime-test n next)) r next))))
+  (define (print-result ratio)
+    (newline)
+    (display n)
+    (display " ratio *** ")
+    (display ratio))
+  (print-result (/ (search-for-primes-sub n count 0 0 (lambda (n) (+ n 1)))
+                   (search-for-primes-sub n count 0 0 (lambda (n) (if (= n 2) 3 (+ n 2)))))))
+
+(search-for-primes 1000 3)
+(search-for-primes 10000 3)
+(search-for-primes 100000 3)
+(search-for-primes 1000000 3)
+(search-for-primes 10000000000 3)
+(search-for-primes 100000000000 3)
+(search-for-primes 1000000000000 3) ; the ratio is getting closer to 2 as n grows.. hm...
