@@ -1,8 +1,8 @@
 (define (expmod base exp m)
   (define (test e a)
-    (cond ((= e exp) a)
-          ((= a 1) 0)
-          (else a)))
+    (if (and (< e exp) (= a 1))
+        0
+        a))
   (define (expmod-sub base exp)
     (cond ((= exp 0) 1)
           ((even? exp)
