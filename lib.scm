@@ -4,4 +4,7 @@
 (define (cube x)  (* x x x))
 (define (average x y)
   (/ (+ x y) 2))
-
+(define (logt base x)
+  (/ (log x) (log base)))
+(define (log2 x)
+  (logt 2 x))
