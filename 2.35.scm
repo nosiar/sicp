@@ -1,0 +1,7 @@
+(define (count-leaves t)
+  (foldr + 0 (map (lambda (sub-t)
+                    (if (pair? sub-t)
+                        (count-leaves sub-t)
+                        1))
+                  t)))
+(count-leaves (list 1 (list 2 3 4) (list 5 (list 6 13 (list 14 16) 15) 7) 8 9 (list 10 11) 12))
