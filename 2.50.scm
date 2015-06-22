@@ -2,10 +2,6 @@
 
 (define (transform-painter painter origin corner1 corner2)
   (lambda (frame g)
-    (painter frame g)))
-
-(define (transform-painter painter origin corner1 corner2)
-  (lambda (frame g)
     (let ((m (frame-coord-map frame)))
       (let ((new-origin (m origin)))
         (painter
