@@ -33,7 +33,7 @@
         (paint-top frame g)))))
 
 (define (below2 painter1 painter2)
-  (rotate180 (rotate270 (beside (rotate270 painter1) (rotate270 painter2)))))
+  (rotate90 (beside (rotate270 painter1) (rotate270 painter2))))
 
 (define wave2 (beside wave (flip-vert wave)))
 (define wave3 (below wave (flip-horiz wave)))
